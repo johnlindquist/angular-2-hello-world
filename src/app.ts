@@ -5,27 +5,33 @@ import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/merge';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {Calculator} from './components/calculator';
 
 @Component({
     providers:[provideStore({calculate})],
     selector: 'app',
+    directives:[Calculator],
     template: `
-        <button (click)="add$.next(1)">+1</button>
-        <button (click)="add$.next(-1)">-1</button>
-        <button (click)="reset$.next()">0</button>
-        {{sum | async}}
+        <calculator 
+            (add)="add$.next($event)" 
+            (reset)="reset$.next($event)" 
+            [sum]="sum | async">        
+        </calculator>
     `
 })
 export class App{
-    sum;
+    sum:Observable<number>;
 
     add$ = new Subject();
     reset$ = new Subject();
 
+    sub:Subscription;
+
     constructor(store:Store){
         this.sum = store.select('calculate');
 
-        Observable.merge(
+        this.sub = Observable.merge(
             this.add$.map(value =>
                 ({type:ADD, payload:value})
             ),
@@ -33,5 +39,9 @@ export class App{
                 ({type:RESET})
             )
         ).subscribe(store.dispatch.bind(store));
+    }
+
+    ngOnDestroy(){
+        this.sub.unsubscribe();
     }
 }

@@ -20,7 +20,7 @@
     "typescript": "^1.8.9"
   },
   "scripts": {
-    "start": "browser-sync start --server --files=\"src/**.ts\"",
+    "start": "browser-sync start --server --files=\"src/**/*.ts\"",
     "build": "node build"
   },
   "author": "",
