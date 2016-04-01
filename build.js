@@ -1,36 +1,40 @@
 var path = require("path");
 var Builder = require('systemjs-builder');
+var fs = require('fs-extra');
 
 var builder = new Builder('./', './config.js');
 
+//clear dist
+fs.removeSync('dist');
+
+//build
 builder
-    .buildStatic('./src/main.dist', './dist/main.js', {
-        minify: true, 
-        sourceMaps: true 
-        })
-    .then(function() {
-    console.log('Build complete');
+    .buildStatic('./build/main', './dist/main.js', {
+        minify: true,
+        sourceMaps: true
     })
-    .catch(function(err) {
-    console.log('Build error');
-    console.log(err);
+    .then(function () {
+        console.log('Build complete');
+    })
+    .catch(function (err) {
+        console.log('Build error');
+        console.log(err);
     });
 
-
-
-var fs = require('fs-extra')
+//copy polyfills
 fs.copy(
-    './node_modules/angular2/bundles/angular2-polyfills.js', 
-    './dist/angular2-polyfills.js', 
+    './node_modules/angular2/bundles/angular2-polyfills.js',
+    './dist/angular2-polyfills.js',
     function (err) {
-        if (err) return console.error(err)
+        if (err) return console.error(err);
         console.log("copied angular2-polyfills.js to dist")
     });
-    
+
+//copy index template
 fs.copy(
-    './index.dist.html', 
-    './dist/index.html', 
+    './build/index.html',
+    './dist/index.html',
     function (err) {
-        if (err) return console.error(err)
+        if (err) return console.error(err);
         console.log("copied index.html to dist")
     });    

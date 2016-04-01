@@ -9,7 +9,8 @@ SystemJS.config({
     packages: {
         "rxjs": { "defaultExtension": "js" },
         "angular2": { "defaultExtension": "js" },
-        "src": { "defaultExtension": "ts" }
+        "src": { "defaultExtension": "ts" },
+        "build": { "defaultExtension": "ts" },
     }
 });
 
