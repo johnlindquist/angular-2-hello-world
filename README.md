@@ -5,7 +5,7 @@
 
 ## TL;DR
 `npm start` - Compiles in-browser
-`npm build` - Compiles to a `dist` dir
+`npm run build` - Compiles to a `dist` dir
 
 ## Webstorm
 Dismiss the "Compile TypeScript" prompt with `no`
