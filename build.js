@@ -11,6 +11,7 @@ fs.removeSync('dist');
 builder
     .buildStatic('./build/main', './dist/main.js', {
         minify: true,
+        mangle: false,
         sourceMaps: true
     })
     .then(function () {

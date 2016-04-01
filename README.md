@@ -18,4 +18,5 @@ Uses SystemJS and TypeScript for in-browser compiling
 Uses SystemJSBuilder for final build
 
 ## Other
-* Uses `http-server` for dev host, but you can use any server you want.
+* Uses `browser-sync` for dev host, but you can use any server you want.
+* Build size will improve *VASTLY* in upcoming Angular 2 releases, for now we can't even minify.
