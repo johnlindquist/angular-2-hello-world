@@ -7,17 +7,19 @@ import 'rxjs/add/observable/merge';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {Calculator} from './components/calculator';
+import {ShareToPlnkr} from './common/components/share-to-plnkr.component';
 
 @Component({
     providers:[provideStore({calculate})],
     selector: 'app',
-    directives:[Calculator],
+    directives:[Calculator, ShareToPlnkr],
     template: `
         <calculator 
             (add)="add$.next($event)" 
             (reset)="reset$.next($event)" 
             [sum]="sum | async">        
         </calculator>
+        <share-to-plnkr></share-to-plnkr>
     `
 })
 export class App{

@@ -7,6 +7,9 @@
 `npm start` - Compiles in-browser
 `npm run build` - Compiles to a `dist` dir
 
+## Style Guide
+https://github.com/mgechev/angular2-style-guide
+
 ## Webstorm
 Dismiss the "Compile TypeScript" prompt with `no`
 
