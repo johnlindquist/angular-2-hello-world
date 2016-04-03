@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, ViewChild} from 'angular2/core';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 import 'rxjs/add/operator/map';
 
@@ -7,54 +7,32 @@ import 'rxjs/add/operator/map';
     selector: 'share-to-plnkr',
     template: `
     <form #form method="post" action="http://plnkr.co/edit/?p=preview" target="_blank">
-        <input type="hidden" name="tags[0]" value="angularjs">
-        <input type="hidden" name="tags[1]" value="example">
-        <input type="hidden" name="private" value="false">
-        <button (click)="onClick(form)">Submit</button>
+        <input type="hidden" name="tags[0]" value="Angular 2">        
+        <input type="hidden" name="tags[1]" value="egghead.io workshop">        
+        <input type="hidden" *ngFor="#f of files" name="files[{{f.file}}]" value="{{f.contents}}">
+        <div>//Posts to plunkr, converts all node_modules refs to npmcdn</div>
+        <button (click)="onClick(form)">Post Current to Plnkr</button>
     </form>
 `
 })
 export class ShareToPlnkr {
+    files;
     onClick(form) {
         this.http.get('./plnkr')
             .map(res => res.text())
             .subscribe(files => {
-                function addHidden(theForm, key, value) {
-                    // Create a hidden input element, and append it to the form:
-                    var input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = value;
-                    theForm.appendChild(input);
-                }
-
                 const f = JSON.parse(files);
 
-                Object.keys(f)
-                    .forEach(key => {
-                       addHidden(form, `files[${key}]`, f[key])
-                    });
+                this.files = Object.keys(f)
+                    .map(key => ({
+                        file:key,
+                        contents: f[key]
+                    }));
 
-                form.submit();
+                //this is avoiding a bunch of fancy `ngAfterViewChecked calls/logic`
+                setTimeout(()=> form.submit(), 1000);
             });
     }
-
-    index =
-        `<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <title>Angular 2 App</title>
-                <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-                <script src="node_modules/systemjs/dist/system.js"></script>
-                
-            </head>
-            <body>
-                <app></app> 
-                <script src="config.js"></script>
-                <script>System.import('src/main');</script>
-            </body>
-            </html>`;
 
     constructor(private http:Http) {
 

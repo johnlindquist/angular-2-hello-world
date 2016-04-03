@@ -33,9 +33,8 @@ function showFiles(req, res, next){
         .concatMap(function(file){
             return readFile(file, 'utf8')
                 .map(function (contents) {
-                    if(file === 'config.js' || file === 'index.html'){
-                        contents = contents.replace(/node_modules/g, 'https://npmcdn.com')
-                    }
+                    contents = contents.replace(/node_modules/g, 'https://npmcdn.com');
+                    contents = contents.replace('<share-to-plnkr></share-to-plnkr>', '');
 
                     return {
                         file: file,

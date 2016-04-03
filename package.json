@@ -21,7 +21,7 @@
     "typescript": "^1.8.9"
   },
   "scripts": {
-    "start": "browser-sync start --server --files=\"src/**/*.ts\" --directory --startPath=\"index.html\"",
+    "start": "node server",
     "build": "node build"
   },
   "author": "",
