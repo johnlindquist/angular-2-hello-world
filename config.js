@@ -1,6 +1,9 @@
 SystemJS.config({
     transpiler: "typescript",
-    typescriptOptions: { "emitDecoratorMetadata": true },
+    typescriptOptions: {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
     map: {
         "rxjs": "node_modules/rxjs",
         "angular2": "node_modules/angular2",
