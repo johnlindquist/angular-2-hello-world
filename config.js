@@ -5,7 +5,7 @@ SystemJS.config({
         "emitDecoratorMetadata": true
     },
     map: {
-        "rxjs": "node_modules/rxjs",
+        "rxjs": "node_modules/rxjs@5.0.0-beta.2",
         "angular2": "node_modules/angular2",
         "@ngrx": "node_modules/@ngrx",
         "typescript": "node_modules/typescript/lib/typescript.js"
