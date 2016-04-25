@@ -18,8 +18,9 @@ SystemJS.config({
           "main":"dist/index.js"
         },
 
-        "src": { "defaultExtension": "ts" },
-        "build": { "defaultExtension": "ts" }
+        "src": { "defaultExtension": "ts", "main":"main" },
+        "build": { "defaultExtension": "ts" },
+        
     }
 });
 
