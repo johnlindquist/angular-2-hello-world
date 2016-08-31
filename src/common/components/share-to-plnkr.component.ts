@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
         <input type="hidden" name="tags[0]" value="Angular 2">        
         <input type="hidden" name="tags[1]" value="egghead.io workshop">        
         <input type="hidden" *ngFor="#f of files" name="files[{{f.file}}]" value="{{f.contents}}">
-        <div>//Posts to plunkr, converts all node_modules refs to npmcdn</div>
+        <div>//Posts to plunkr, converts all node_modules refs to unpkg</div>
         <button (click)="onClick(form)">Post Current to Plnkr</button>
     </form>
 `
